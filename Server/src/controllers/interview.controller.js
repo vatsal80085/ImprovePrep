@@ -2,7 +2,11 @@ const pdfParse=require("pdf-parse")
 const { generateInterviewReport }=require("../services/ai.service")
 const interviewReportModel=require("../models/InterviewReport.model")
 
-
+/**
+ * 
+ * @description Controller to generate new interview report on the basis of user self description,resume pdf and job desciption
+ * 
+ */
 async function generateInterviewReportController(req, res) {
 
     const resumeContent=await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
@@ -28,8 +32,46 @@ async function generateInterviewReportController(req, res) {
     })
 }
 
+/**
+ * 
+ * @description Controller to get interview report by interviewId
+ */
+async function getInterviewReportByIdController(req, res) {
+    const { interviewId }=req.params
+    const interviewReport=await interviewReportModel.findById(interviewId)
 
+    if(!interviewReport){
+        return res.status(404).json({
+            message:"Interview Report not found"
+        })
+    }
+
+    if(interviewReport.user.toString()!==req.user.id){
+        return res.status(403).json({
+            message:"You are not authorized to access this interview report"
+        })
+    }
+    
+    res.status(200).json({
+        message:"Interview Report fetched successfully",
+        interviewReport
+    })
+}
+
+/** 
+ * @description Controller to get all interview reports of logged in user.
+ */
+async function getAllInterviewReportsController(req, res) {
+    const interviewReports = await interviewReportModel.find({ user: req.user.id }).sort({ createdAt: -1 }).select("-resume -selfDescription -jobDescription -__v -technicalQuestions -behavioralQuestions -skillGaps -preparationPlan")
+
+    res.status(200).json({
+        message: "Interview reports fetched successfully.",
+        interviewReports
+    })
+}
 
 module.exports = {
-    generateInterviewReportController
+    generateInterviewReportController,
+    getInterviewReportByIdController,
+    getAllInterviewReportsController
 }
