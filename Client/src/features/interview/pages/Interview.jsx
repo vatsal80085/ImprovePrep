@@ -47,6 +47,7 @@ const RoadMapDay = ({ day }) => (
   </article>
 );
 
+// main component
 const Interview = () => {
   const [activeNav, setActiveNav] = useState("technical");
   const { report, getReportById, loading } = useInterview();

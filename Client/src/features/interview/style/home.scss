@@ -273,6 +273,74 @@ input[type="file"] {
     stroke-linejoin: round;
   }
 }
+
+.recent-reports {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  h2 {
+    font-size: 1rem;
+    font-weight: 650;
+  }
+
+  .reports-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .report-item {
+    background: $panel;
+    border: 1px solid $border;
+    border-radius: 0.45rem;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      border-color: $pink;
+      transform: translateY(-2px);
+    }
+
+    h3 {
+      font-size: 0.82rem;
+      font-weight: 650;
+      margin: 0;
+    }
+
+    .report-meta {
+      color: $muted;
+      font-size: 0.68rem;
+      margin: 0;
+    }
+
+    .match-score {
+      font-size: 0.72rem;
+      font-weight: 650;
+      margin: 0;
+
+      &.score--high {
+        color: #5ed69a;
+      }
+      &.score--mid {
+        color: #f5b75b;
+      }
+      &.score--low {
+        color: #e45b70;
+      }
+    }
+  }
+}
 .page-footer {
   display: flex;
   gap: 1.6rem;

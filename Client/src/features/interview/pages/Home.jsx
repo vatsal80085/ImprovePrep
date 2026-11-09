@@ -1,14 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../style/home.scss";
 import { useInterview } from "../hooks/useInterview.js";
 import { useNavigate } from "react-router";
 
 const Home = () => {
-  const { loading, generateReport, reports } = useInterview();
+  const { loading, generateReport, reports, getAllReports } = useInterview();
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
   const resumeInputRef = useRef();
 
+  useEffect(() => {
+  getAllReports();
+}, [getAllReports]);
   const navigate = useNavigate();
 
   const handleGenerateReport = async () => {
@@ -146,9 +149,9 @@ const Home = () => {
               </label>
             </div>
 
-            {/* OR Divider */}
+            {/* AND Divider */}
             <div className="or-divider">
-              <span>OR</span>
+              <span>AND</span>
             </div>
 
             {/* Quick Self-Description */}
@@ -197,7 +200,7 @@ const Home = () => {
                 </svg>
               </span>
               <p>
-                Either a <strong>Resume</strong> or a{" "}
+                A<strong>Resume</strong> and a{" "}
                 <strong>Self Description</strong> is required to generate a
                 personalized plan.
               </p>
