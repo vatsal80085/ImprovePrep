@@ -200,7 +200,7 @@ const Home = () => {
                 </svg>
               </span>
               <p>
-                A<strong>Resume</strong> and a{" "}
+                A <strong>Resume</strong> and a{" "}
                 <strong>Self Description</strong> is required to generate a
                 personalized plan.
               </p>
