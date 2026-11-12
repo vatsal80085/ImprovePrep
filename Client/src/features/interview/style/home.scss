@@ -204,6 +204,13 @@ $pink: #f50061;
     }
   }
 }
+.upload-feedback {
+  margin: 0;
+  color: #5ed69a;
+  font-size: 0.65rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
 input[type="file"] {
   display: none;
 }

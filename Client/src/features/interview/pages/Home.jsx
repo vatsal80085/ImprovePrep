@@ -7,6 +7,7 @@ const Home = () => {
   const { loading, generateReport, reports, getAllReports } = useInterview();
   const [jobDescription, setJobDescription] = useState("");
   const [selfDescription, setSelfDescription] = useState("");
+  const [selectedResume, setSelectedResume] = useState(null);
   const resumeInputRef = useRef();
 
   useEffect(() => {
@@ -145,8 +146,17 @@ const Home = () => {
                   id="resume"
                   name="resume"
                   accept=".pdf,.docx"
+                  onChange={(event) => {
+                    setSelectedResume(event.target.files?.[0] || null);
+                  }}
                 />
               </label>
+              {selectedResume && (
+                <p className="upload-feedback" role="status" aria-live="polite">
+                  {selectedResume.name} selected. Click Generate My Interview
+                  Strategy to upload it.
+                </p>
+              )}
             </div>
 
             {/* AND Divider */}
